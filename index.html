@@ -26,7 +26,8 @@
                     </li>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" id="searchTxt" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" type="search" id="searchTxt" placeholder="Search"
+                        aria-label="Search">
                     <button class="btn btn-outline-success" type="submit">Search</button>
                 </form>
             </div>
@@ -34,19 +35,20 @@
     </nav>
 
     <div class="container my-3">
-        <h1>Welcome to Magic Notes</h1>
+        <h1 class="text-center mb-2">Welcome to Magic Notes</h1>
         <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Add a Note</h5>
+            <div class="card-body" id="note">
+                <h5>Add a Title for Your Note</h5>
+                <input type="text" class="w-100 mb-4" name="addTitle" id="addTitle">
+                <h5 class="card-title">Write Your Note Here</h5>
                 <div class="form-group mb-3">
-                    <textarea class="form-control" id="addTxt" rows="3"></textarea>
+                    <textarea class="form-control" id="addTxt" rows="4"></textarea>
                 </div>
                 <button class="btn btn-primary" id="addBtn">Add Note</button>
             </div>
         </div>
 
-        <hr>
-        <h1>My Notes</h1>
+        <h1 class="text-center">My Notes</h1>
         <hr>
 
         <!-- Notes will be added or removed from here using app.js -->

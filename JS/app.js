@@ -6,9 +6,14 @@ showNotes();
 let addBtn = document.getElementById('addBtn');
 addBtn.addEventListener('click', function(e){
 
+    let addTitle = document.getElementById('addTitle');
     let addTxt = document.getElementById('addTxt');
 
     //if note is empty and press add note button, then give a alert
+    if(addTitle.value == ""){
+        return alert('Please give a Title for a note');
+    }
+
     if(addTxt.value == ""){
         return alert('This is empty note !! Try to write something useful');
     }
@@ -26,11 +31,17 @@ addBtn.addEventListener('click', function(e){
     }
 
     // add the note in notes array, and then update localStorage.
-    notesObj.push(addTxt.value);
+    let note = {
+        Title: addTitle.value,
+        Note : addTxt.value
+    };
+
+    notesObj.push(note);
     localStorage.setItem('notes', JSON.stringify(notesObj));
 
     // after presssing add note button, our textarea(where we write note) should be blank as before.
     addTxt.value = "";
+    addTitle.value = "";
     showNotes();
 })
 
@@ -49,11 +60,12 @@ function showNotes(){
     let addNote = "";
 
     notesObj.forEach((element, index) => {
+
         addNote += `
         <div class="noteCard m-2 card" style="width: 18rem;">
                 <div class="card-body">
-                    <h5 class="card-title">Note ${index + 1}</h5>
-                    <p class="card-text">${element}</p>
+                    <h5 class="card-title">${element.Title}</h5>
+                    <p class="card-text">${element.Note}</p>
                     <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</button>
                 </div>
             </div>`
@@ -94,9 +106,10 @@ search.addEventListener('input', function(){
     let noteCards = document.getElementsByClassName('noteCard');
 
     Array.from(noteCards).forEach(element => {
+        let cardTitle = element.getElementsByTagName('h5')[0].innerText.toLowerCase();
         let cardTxt = element.getElementsByTagName('p')[0].innerText.toLowerCase();
 
-        if(cardTxt.includes(inputVal)){
+        if(cardTxt.includes(inputVal) || cardTitle.includes(inputVal)){
             element.style.display = "block";
         }
         else{
@@ -107,7 +120,7 @@ search.addEventListener('input', function(){
 /*
 further features
 
-1. add title
+1. add title // This is done
 2. add important tag for the notes
 3. sync and host with web server
 
